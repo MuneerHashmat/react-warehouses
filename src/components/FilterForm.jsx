@@ -44,7 +44,7 @@ const FilterForm = () => {
     setSearchInput("");
   };
   return (
-    <div className="mt-5 px-3 py-5 bg-gray-200 flex flex-col items-center gap-2">
+    <div className="mt-5 px-3 py-5 bg-slate-200 flex flex-col items-center gap-2">
       <h1 className="text-center text-[30px] font-semibold mb-3">
         Search and filter warehouses
       </h1>

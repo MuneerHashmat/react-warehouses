@@ -1,11 +1,13 @@
 import data from "../data/warehouses.json";
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = JSON.parse(localStorage.getItem("warehouses")) || {
-  warehouses: [...data],
+const initialWarehouses =
+  JSON.parse(localStorage.getItem("warehouses")) || data;
+const initialState = {
+  warehouses: [...initialWarehouses],
 };
 
 export const warehousesSlice = createSlice({
-  name: "warehouses",
+  name: "warehouse",
   initialState,
   reducers: {
     filterItems: (state, action) => {
@@ -45,9 +47,18 @@ export const warehousesSlice = createSlice({
           .includes(action.payload.searchText.toLowerCase());
       });
     },
+
+    editItem: (state, action) => {
+      const storedData = JSON.parse(localStorage.getItem("warehouses")) || data;
+      const { id, obj } = action.payload;
+      state.warehouses = storedData.map((item) => {
+        return item.id == id ? obj : item;
+      });
+    },
   },
 });
 
-export const { filterItems, resetItems, searchItems } = warehousesSlice.actions;
+export const { filterItems, resetItems, searchItems, editItem } =
+  warehousesSlice.actions;
 
 export default warehousesSlice.reducer;
